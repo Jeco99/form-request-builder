@@ -1,5 +1,3 @@
-"use client";
-
 import { Container } from "@mantine/core";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
