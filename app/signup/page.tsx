@@ -1,35 +1,24 @@
 "use client";
 
-import { Box, Container, Title } from "@mantine/core";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { signup, loginwithgoogle } from "../action";
 import Link from "next/link";
 
-interface IFormInput {
-  emailAddress: string;
-  password: string;
-}
-
-export default function SignUp() {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
-
+export default function LoginPage() {
   return (
-    <Box>
-      <Title>Create an Account </Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Container>
-          <label htmlFor="">Email Address</label>
-          <input
-            {...register("emailAddress", { required: true, maxLength: 20 })}
-          />
-          <label htmlFor="">Password</label>
-          <input {...register("password", { pattern: /^[A-Za-z]+$/i })} />
-          <input type="submit" value={"Sign Up"} />
-          <Link href={"/"}>
-            <input type="submit" value={"Log In"} />
-          </Link>
-        </Container>
+    <>
+      <h1>Create an Account</h1>
+      <form>
+        <label htmlFor="email">Email:</label>
+        <input id="email" name="email" type="email" required />
+        <label htmlFor="password">Password:</label>
+        <input id="password" name="password" type="password" required />
+
+        <button formAction={signup}>Sign Up</button>
+        <Link href={"/"}>
+          <button type="button">Already have an Account?</button>
+        </Link>
       </form>
-    </Box>
+      <button formAction={loginwithgoogle}>Log in with Google</button>
+    </>
   );
 }
